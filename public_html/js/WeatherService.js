@@ -1,11 +1,9 @@
 
 // Constructor
-function WeatherService(){
+function WeatherService(coords){
     this.apiKey = "1cb5a2f98773b84b88a87fea368d23d5";
-    // Retrieve position
-    this.position = new Position();
-    this.longitude = this.position.getLongitude();
-    this.latitude = this.position.getLatitude();
+    this.longitude = coords.long;
+    this.latitude = coords.lat;
     this.forecast;
 }
 
@@ -13,7 +11,7 @@ function WeatherService(){
 WeatherService.prototype.loadForecast = function(){
     
     $.ajax({
-        url : "api.openweathermap.org/data/2.5/forecast?" 
+        url : "http://api.openweathermap.org/data/2.5/forecast?" 
                 + "appid=" + this.apiKey 
                 + "&lat=" + this.latitude
                 + "&lon=" + this.longitude

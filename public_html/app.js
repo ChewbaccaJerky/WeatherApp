@@ -1,8 +1,30 @@
 /* Main JS */
+var userCoords = {
+    long : '',
+    lat: ''
+};
 
+function getLocation(){
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else {
+        console.log("This device does not support geolocation.");
+    }
+}
 
-$(document).ready(function(){
-    var pos = new Position();
-    pos.loadPosition();
-    console.log(pos.longitude);
-});
+function showPosition(position){
+    userCoords.lat = position.coords.latitude;
+    userCoords.long = position.coords.longitude;
+    
+    console.log(
+        "Latitude: " + userCoords.lat + 
+        "\n" +
+        "Longitude:" + userCoords.long
+    );
+    
+    var weather = new WeatherService(userCoords);
+    weather.loadForecast();
+}
+
+getLocation();
