@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Weather Application</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <!-- Imports -->
+        <link type="text/css" rel="stylesheet" href="vendor/bootstrap-3.0/css/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="style.css"/>
         <script type="text/javascript" src="vendor/jquery/jquery-3.1.1.min.js"></script>
     </head>
     <body>
         
-        <div class="weather-container">
-            
+        <form>
+            <div class="form-group">
+                <input type="text" name="city" placeholder="City's Name"/>
+            </div>
+            <button type='submit'>Search</button>
+        </form>
+        
+        <div class='weather-box container-fluid col-md-offset-4 col-md-4'>
+            <div class="temps">
+                <span id="temp" class="row"></span>
+                <span id="temp_min" class="row"></span>
+                <span id="temp_max" class="row"></span>
+            </div>
+            <div id="description">
+                <span id="main"></span>
+            </div>
         </div>
-        <button id="get">Get!</button>
+        
         
         <div class="scripts">
             <!-- Application -->

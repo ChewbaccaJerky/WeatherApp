@@ -24,7 +24,11 @@ function showPosition(position){
     );
     
     var weather = new WeatherService(userCoords);
-    weather.loadForecast();
+    weather.loadCurrentWeather();
 }
 
 getLocation();
+
+$(document).ready(function(){
+    
+});
