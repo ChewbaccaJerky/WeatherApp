@@ -1,12 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
 html, body {
     margin: 0;
-    padding: 0;
+    padding: 100px 0;
     /* 
-    font-family: "";
     font-color: ????;
     */
+    font-family: 'PT Sans', sans-serif;
+    background-color: #EEE;
 }
 
-body {
-    
+
+.weather-box {
+    padding: 20px 30px;
+    background-color: #FFF;
+    border-radius: 30px;
+    box-shadow: -5px 5px 10px #888;
 }

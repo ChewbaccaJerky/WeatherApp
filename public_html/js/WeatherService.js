@@ -41,10 +41,11 @@ WeatherService.prototype.loadCurrentWeather = function(){
 };
 
 /* Load city's weather when searched */
+
 WeatherService.prototype.loadSearchedCityWeather = function(city){
     $.ajax({
         url : "http://api.openweathermap.org/data/2.5/weather?" 
-                + "q=" + city
+                + "q=" + city + "&appid=" + apiKey
         ,
         dataType : "json",
         success : this.success,
@@ -56,30 +57,31 @@ WeatherService.prototype.loadSearchedCityWeather = function(city){
 
 WeatherService.prototype.success = function(result){
   
+  var kelvinToFaren = function(temp) {
+      return (temp * (9/5)) - 459.67;
+  };
+  
   var weather = {
       description : result.weather[0].main,
-      temp : result.main.temp,
-      temp_min : result.main.temp_min,
-      temp_max : result.main.temp_max
+      temp : parseFloat(kelvinToFaren(result.main.temp)).toFixed(2),
+      temp_min : parseFloat(kelvinToFaren(result.main.temp_min)).toFixed(2),
+      temp_max : parseFloat(kelvinToFaren(result.main.temp_max)).toFixed(2)
   };
   
   console.log("Begin!");
   
-  $('#temp').html(weather.temp);
-  $('#temp_min').html(weather.temp_min);
-  $('#temp_max').html(weather.temp_max);
-  $('#description').html(weather.description);
+  $('#temp').append(weather.temp + " F");
+  $('#temp_min').append(weather.temp_min + " F");
+  $('#temp_max').append(weather.temp_max + " F");
+  $('#main').append(weather.description);
+  $('#btn-f').addClass("active");
   
-  switch(weather.description){
-      case "clouds":
-      case "Clouds":
-          $('.weather-box').css("background", "url("+weather_img.cloud+") no-repeat center");
-          $('.weather-box').css("background-size", "contain");
-          break;
-  }
+  //this.setBackground(weather.description);
 };
 
+
 WeatherService.prototype.setBackground = function(description){
+    
     switch(description){
       case "clouds":
       case "Clouds":
@@ -97,6 +99,9 @@ WeatherService.prototype.setBackground = function(description){
       case "snowing":
           $('.weather-box').css("background", "url("+weather_img.snow+") no-repeat center");
           break;
+      default:
+          $('.weather-box').css("background", "url("+weather_img.sunny+") no-repeat center");
+          
     }
     
     $('.weather-box').css("background-size", "contain");
